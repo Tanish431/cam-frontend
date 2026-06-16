@@ -1,26 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    --color-background: rgb(15 14 13);
+    --color-foreground: rgb(245 243 240);
+    --color-card: rgb(26 25 23);
+    --color-card-foreground: rgb(245 243 240);
+    --color-border: rgb(46 44 42);
+    --color-input: rgb(46 44 42);
+    --color-ring: rgb(79 142 247);
+    --color-primary: rgb(79 142 247);
+    --color-primary-foreground: rgb(15 14 13);
+    --color-secondary: rgb(34 33 32);
+    --color-secondary-foreground: rgb(245 243 240);
+    --color-muted: rgb(34 33 32);
+    --color-muted-foreground: rgb(156 150 144);
+    --color-accent: rgb(34 33 32);
+    --color-accent-foreground: rgb(245 243 240);
+    --color-destructive: rgb(239 68 68);
+    --color-popover: rgb(26 25 23);
+    --color-popover-foreground: rgb(245 243 240);
+    --radius-lg: 0.5rem;
+    --radius-md: calc(0.5rem - 2px);
+    --radius-sm: calc(0.5rem - 4px);
+    --font-sans: "Inter", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(15 14 13);
+    color: rgb(245 243 240);
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: rgb(26 25 23);
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(46 44 42);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(92 90 87);
 }
