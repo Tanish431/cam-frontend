@@ -97,9 +97,11 @@ export default function PCAScatter({ window }: { window: number }) {
           .tickSize(-innerH)
           .tickFormat(() => ""),
       )
+      .call((g) => g.select(".domain").remove())
       .selectAll("line")
-      .attr("stroke", "#f1f5f9")
-      .attr("stroke-width", 1);
+      .attr("stroke", "#2e2c2a")
+      .attr("stroke-width", 1)
+      .attr("shape-rendering", "crispEdges");
 
     g.append("g")
       .attr("class", "grid")
@@ -109,9 +111,11 @@ export default function PCAScatter({ window }: { window: number }) {
           .tickSize(-innerW)
           .tickFormat(() => ""),
       )
+      .call((g) => g.select(".domain").remove())
       .selectAll("line")
-      .attr("stroke", "#f1f5f9")
-      .attr("stroke-width", 1);
+      .attr("stroke", "#2e2c2a")
+      .attr("stroke-width", 1)
+      .attr("shape-rendering", "crispEdges");
 
     // zero axes
     g.append("line")
@@ -119,7 +123,7 @@ export default function PCAScatter({ window }: { window: number }) {
       .attr("x2", xScale(0))
       .attr("y1", 0)
       .attr("y2", innerH)
-      .attr("stroke", "#cbd5e1")
+      .attr("stroke", "#3a3836")
       .attr("stroke-dasharray", "4 2");
 
     g.append("line")
@@ -127,7 +131,7 @@ export default function PCAScatter({ window }: { window: number }) {
       .attr("x2", innerW)
       .attr("y1", yScale(0))
       .attr("y2", yScale(0))
-      .attr("stroke", "#cbd5e1")
+      .attr("stroke", "#3a3836")
       .attr("stroke-dasharray", "4 2");
 
     // axes labels
@@ -136,7 +140,7 @@ export default function PCAScatter({ window }: { window: number }) {
       .attr("y", innerH + 32)
       .attr("text-anchor", "middle")
       .attr("font-size", 11)
-      .attr("fill", "#94a3b8")
+      .attr("fill", "#5c5a57")
       .text(`PC1 (${(data.variance.pc1_variance * 100).toFixed(1)}% variance)`);
 
     g.append("text")
@@ -145,7 +149,7 @@ export default function PCAScatter({ window }: { window: number }) {
       .attr("y", -28)
       .attr("text-anchor", "middle")
       .attr("font-size", 11)
-      .attr("fill", "#94a3b8")
+      .attr("fill", "#5c5a57")
       .text(`PC2 (${(data.variance.pc2_variance * 100).toFixed(1)}% variance)`);
 
     // draw trajectory line (faint, connecting dots in time order)
@@ -212,7 +216,7 @@ export default function PCAScatter({ window }: { window: number }) {
       .attr("r", (d) => (analogueDates.has(d.time) ? 5 : 3))
       .attr("fill", (d, i) => CLUSTER_COLORS[d.cluster_id % 4])
       .attr("fill-opacity", (_, i) => 0.3 + (i / data.points.length) * 0.5)
-      .attr("stroke", (d) => (analogueDates.has(d.time) ? "#1e40af" : "none"))
+      .attr("stroke", (d) => (analogueDates.has(d.time) ? "#4f8ef7" : "none"))
       .attr("stroke-width", 2)
       .style("cursor", "pointer")
       .on("mouseenter", function (event, d) {
@@ -234,7 +238,7 @@ export default function PCAScatter({ window }: { window: number }) {
           .attr("x", xScale(p.pc1) + 6)
           .attr("y", yScale(p.pc2) - 4)
           .attr("font-size", 9)
-          .attr("fill", "#1e40af")
+          .attr("fill", "#7eb3ff")
           .attr("font-weight", "600")
           .text(p.time.slice(5)); // MM-DD
       });
@@ -245,7 +249,7 @@ export default function PCAScatter({ window }: { window: number }) {
       .attr("cy", yScale(today.pc2))
       .attr("r", 10)
       .attr("fill", CLUSTER_COLORS[today.cluster_id % 4])
-      .attr("stroke", "#fff")
+      .attr("stroke", "#1a1917")
       .attr("stroke-width", 2.5)
       .attr("fill-opacity", 1);
 
@@ -263,13 +267,13 @@ export default function PCAScatter({ window }: { window: number }) {
       .call(d3.axisBottom(xScale).ticks(5).tickSize(3))
       .selectAll("text")
       .attr("font-size", 9)
-      .attr("fill", "#94a3b8");
+      .attr("fill", "#5c5a57");
 
     g.append("g")
       .call(d3.axisLeft(yScale).ticks(5).tickSize(3))
       .selectAll("text")
       .attr("font-size", 9)
-      .attr("fill", "#94a3b8");
+      .attr("fill", "#5c5a57");
   }, [data, analogueDates]);
 
   if (loading)
@@ -295,11 +299,11 @@ export default function PCAScatter({ window }: { window: number }) {
               className="w-3 h-3 rounded-full"
               style={{ background: CLUSTER_COLORS[today?.cluster_id % 4] }}
             />
-            <span className="text-sm font-semibold text-gray-700">
+            <span className="text-sm font-semibold text-foreground">
               Today: {todayLabel}
             </span>
           </div>
-          <span className="text-xs text-gray-400">
+          <span className="text-xs text-muted-foreground">
             {(data.variance.pc1_variance * 100).toFixed(1)}% +{" "}
             {(data.variance.pc2_variance * 100).toFixed(1)}% ={" "}
             {(
@@ -318,12 +322,12 @@ export default function PCAScatter({ window }: { window: number }) {
                 className="w-2.5 h-2.5 rounded-full"
                 style={{ background: CLUSTER_COLORS[p.cluster_id % 4] }}
               />
-              <span className="text-xs text-gray-500">{p.label}</span>
+              <span className="text-xs text-muted-foreground">{p.label}</span>
             </div>
           ))}
           <div className="flex items-center gap-1">
-            <div className="w-3 h-3 rounded-full border-2 border-blue-700 bg-white" />
-            <span className="text-xs text-gray-500">Analogue</span>
+            <div className="w-3 h-3 rounded-full border-2 border-primary bg-background" />
+            <span className="text-xs text-muted-foreground">Analogue</span>
           </div>
         </div>
       </div>
@@ -332,8 +336,8 @@ export default function PCAScatter({ window }: { window: number }) {
       <div className="h-5">
         {hovered && (
           <p
-            className="text-xs font-mono text-gray-600 bg-gray-50
-            px-2 py-1 rounded inline-block"
+            className="text-xs font-mono text-foreground bg-muted/50
+            border border-border px-2 py-1 rounded inline-block"
           >
             {hovered.time} ·{" "}
             {
@@ -348,15 +352,15 @@ export default function PCAScatter({ window }: { window: number }) {
       {/* scatter plot */}
       <svg
         ref={svgRef}
-        className="w-full rounded-lg bg-white border border-gray-100"
+        className="w-full rounded-lg bg-background/40 border border-border/50"
         style={{ height: 420 }}
       />
 
-      <p className="text-xs text-gray-400">
+      <p className="text-xs text-muted-foreground">
         Each point = one trading day projected onto the two principal components
         of the correlation Z-score matrix. Color = regime cluster. Faint line =
         market trajectory through time.{" "}
-        <span className="text-blue-600 font-medium">
+        <span className="text-primary font-medium">
           Blue ring = analogue date.
         </span>{" "}
         Opacity increases toward present. Hover any point for details.
