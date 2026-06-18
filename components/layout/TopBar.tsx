@@ -16,7 +16,7 @@ export function TopBar({ title, subtitle }: Props) {
       backdrop-blur-sm flex items-center justify-between px-6
       sticky top-0 z-40"
     >
-      <div>
+      <div className="py-4">
         <h1 className="text-base font-semibold text-foreground">{title}</h1>
         {subtitle && (
           <p className="text-xs text-muted-foreground mt-0.5">{subtitle}</p>
@@ -31,7 +31,7 @@ export function TopBar({ title, subtitle }: Props) {
           asChild
         >
           <a
-            href="https://github.com/tanish/cross-asset-monitor"
+            href="https://github.com/Tanish431/cross-asset-monitor"
             target="_blank"
             rel="noopener"
           >
