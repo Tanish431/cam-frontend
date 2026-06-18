@@ -7,8 +7,8 @@ import { CorrelationHeatmap } from "@/components/markets/CorrelationHeatmap";
 import { QuickStats } from "@/components/markets/QuickStats";
 import { PairDrawer } from "@/components/markets/PairDrawer";
 import { useWindow } from "@/providers/WindowProvider";
-import NetworkGraph from "@/components/NetworkGraph";
-import PCAScatter from "@/components/PCAScatter";
+import NetworkGraph from "@/components/markets/NetworkGraph";
+import PCAScatter from "@/components/markets/PCAScatter";
 
 export default function MarketsPage() {
   const { window } = useWindow();
